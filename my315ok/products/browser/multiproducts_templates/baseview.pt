@@ -18,16 +18,15 @@
     </metal:block>
 </head>      
 <body>
-
 <metal:main fill-slot="content-core">
-    <tal:main-macro metal:define-macro="content-core"
-        tal:define="toLocalizedTime nocall:context/@@plone/toLocalizedTime;plone_state context/@@plone_portal_state;
-                                                                              portal python:plone_state.portal()">
-		 <div tal:define="imglists python: view.mainimage(fieldname='image');loop python:imglists['preview'];
+    <tal:main-macro metal:define-macro="content-core">
+		 <div tal:define="imglists python: view.mainimage(fieldname='image');
+		 	                loop python:imglists['preview'];
 		                  Batch python:modules['Products.CMFPlone'].Batch;
-                        b_size python:view.PerPagePrdtNum;
+                      b_size python:view.PerPagePrdtNum;
 		                  b_start python:0;
-                        b_start request/b_start | b_start;" tal:omit-tag="" tal:condition="python: len(imglists)">
+                      b_start request/b_start | b_start;" 
+                      tal:omit-tag="" tal:condition="python: len(imglists)">
 		 <div tal:define="batch python:Batch(loop,b_size, int(b_start), orphan=0);" >
 		 <div metal:use-macro="context/batch_macros/macros/navigation" />		 
         <div id="multiproducts">
