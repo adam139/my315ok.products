@@ -31,11 +31,13 @@ class TestControlPanel(unittest.TestCase):
         # Go to the control panel
         browser.getLink('My315okProducts settings').click()
         
-        # Edit the DAM codes field
+        # Edit the wordsNum odes field
         browser.getControl(name='form.widgets.wordsNum').value = "32"
         browser.getControl('Save').click()
         
         # Verify that this made it into the registry
         registry = getUtility(IRegistry)
+        import pdb
+        pdb.set_trace()
         settings = registry.forInterface(IMy315okProductsSettings)
         self.assertEqual(settings.wordsNum,32)
