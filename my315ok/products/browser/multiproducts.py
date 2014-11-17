@@ -16,7 +16,7 @@ class baseview(grok.View):
 
     def fetch_list_position(self,lt,item):
         if item in lt:
-            for i in range(len(lt)):
+            for i in xrange(len(lt)):
                 if lt[i] == item:
                     break
                 else:
@@ -36,7 +36,8 @@ class baseview(grok.View):
     def span_num(self):
 #        import pdb
 #        pdb.set_trace()
-        return "span" + str(12/self.PerRowPrdtNum)
+#        return "span" + str(12/self.PerRowPrdtNum)
+        return "span%s" % (str(12/self.PerRowPrdtNum))    
          
     @memoize
     def prdt_images(self):
@@ -66,7 +67,8 @@ class baseview(grok.View):
         for i in self.prdt_images():            
                 try:
                     objurl = i.getURL()
-                    base =  objurl + "/@@images/" + fieldname + "/"
+#                    base =  objurl + "/@@images/" + fieldname + "/"
+                    base = "%s/@@images/%s/" % (objurl,fieldname)                   
                     tl = i.Title
                     caption = i.Description
                     surl = base  + small
@@ -76,7 +78,8 @@ class baseview(grok.View):
                     pimg = "<img src='%s' alt='%s' />" % (purl,tl)
 #<img src="" tal:attributes="src string:${item/getURL}/@@images/image/thumb" />                    
 #                    limg = "<img src='%s' alt='%s' title='%s' />" % (lurl,tl,tl)
-                    imgobjurl = objurl + "/@@view"                    
+#                    imgobjurl = objurl + "/@@view" 
+                    imgobjurl = "%s/@@view" % (objurl)                   
                     csmall.append(simg)
                     cpreview.append(pimg)
                     clargelink.append(lurl)
@@ -180,24 +183,25 @@ class BootstrapView(baseview):
         span_num = self.span_num()
         rowsnum = (total + colsnum - 1)/colsnum
 
-        for i in range(rowsnum):
-            output = output + '<div class="row-fluid">'
+        for i in xrange(rowsnum):
+#            output = output + '<div class="row-fluid">'
+            output =  '%s<div class="row-fluid">' % (output)          
 #            import pdb
 #            pdb.set_trace()
-            for j in range(colsnum):
+            for j in xrange(colsnum):
                 s2 = i * colsnum + j
-
                 if s2 == total:
                     break
                 richtext = self.overview(s2)
 #                import pdb
 #                pdb.set_trace()                
-                output = output + """
+                output = """%(output)s
                 <div class="%(spanclass)s">
                 <h3 class="title"><a href="%(url)s">%(title)s</a></h3>
                 <div class="mainphoto"><a href="%(largeurl)s" title="%(imgtitle)s" class="lightbox">%(preview)s</a></div>
                 <div class="richtext"><a href="%(url)s" title="点击查看详情">%(richtext)s</a></div>
-                </div>""" % dict(spanclass = span_num,
+                </div>""" % dict(output =output,
+                spanclass = span_num,
                 url = imglists['imgurl'][s2],
                 title = imglists['title'][s2],
                 preview = imglists['preview'][s2],
@@ -205,7 +209,8 @@ class BootstrapView(baseview):
                 imgtitle = imglists['caption'][s2],
                 richtext = richtext)
 
-            output = output + '</div>'
+#            output = output + '</div>'
+            output =  '%s</div>' %(output)            
             
         return output    
         
@@ -232,9 +237,9 @@ class mediapageview(baseview):
         span_num = self.span_num()
         rowsnum = (total + colsnum - 1)/colsnum
 
-        for i in range(rowsnum):
+        for i in xrange(rowsnum):
             output = output + rowstr
-            for j in range(colsnum):
+            for j in xrange(colsnum):
                 s2 = i * colsnum + j
 
                 if s2 == total:
@@ -243,9 +248,7 @@ class mediapageview(baseview):
                 %(span_num,imglists['title'][s2],imglists['imgurl'][s2],imglists['title'][s2],imglists['large'][s2],imglists['caption'][s2],imglists['preview'][s2])
             output = output + '</div>'
             
-        return output
-
-        
+        return output       
 
     
 class storeview(baseview):
@@ -284,12 +287,12 @@ class barsview(baseview):
         try:
             lenth = len(items['titl'])
             if bool(multiline):
-                for i in range(lenth):
+                for i in xrange(lenth):
                     headstr = headstr + '<link url="%s" /><title text="%s"> </title>' % (items['url'][i],items['titl'][i])
                     bodystr = bodystr + '<div class="banner"><a href="%s"><img src="%s" alt="%s" />%s</a></div>' \
                     % (items['link'][i],items['src'][i],items['titl'][i],items['txt'][i])                
             else:
-                for i in range(lenth):
+                for i in xrange(lenth):
                     headstr = headstr + '<link url="%s" /><title text="%s"> </title>' % (items['url'][i],items['titl'][i])
                     bodystr = bodystr + '<div class="banner"><a href="%s"><img src="%s" alt="%s" /></a></div>' \
                     % (items['link'][i],items['src'][i],items['titl'][i])                

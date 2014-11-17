@@ -37,7 +37,7 @@ class TestControlPanel(unittest.TestCase):
         
         # Verify that this made it into the registry
         registry = getUtility(IRegistry)
-        import pdb
-        pdb.set_trace()
+#        import pdb
+#        pdb.set_trace()
         settings = registry.forInterface(IMy315okProductsSettings)
         self.assertEqual(settings.wordsNum,32)
