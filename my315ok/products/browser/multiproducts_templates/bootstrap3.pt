@@ -29,26 +29,21 @@
                       tal:omit-tag="" tal:condition="python: len(imglists)">
 		 <div tal:define="batch python:Batch(loop,b_size, int(b_start), orphan=0);" >
 		 <div metal:use-macro="context/batch_macros/macros/navigation" />		 
-        <div id="multiproducts">
+        <div id="multiproducts" class="row">
           <div tal:repeat = "img batch" tal:omit-tag="">
-             <div tal:define="j python:view.fetch_list_position(loop,img)" class="proditem">
+             <div tal:define="j python:view.fetch_list_position(loop,img)" class="col-md-12">
+             	<div class="row">
 		        <h2 class="title">
 		        	<a tal:content="python: imglists['title'][j]" tal:attributes="href python:imglists['imgurl'][j]">title</a>
               </h2>					 
-              <div class="mainphoto grid_3" tal:condition="exists:python:imglists['large'][j]">
+              <div class="col-xs-12 col-md-4" tal:condition="exists:python:imglists['large'][j]">
               <a href="#" tal:attributes="href python:imglists['large'][j]" class="jqzoom" tal:content="structure python:img"></a>
               </div>
-		       <div class="overview"  tal:condition="exists:python:view.overview(j)"
+		       <div class="col-xs-12 col-md-8"  tal:condition="exists:python:view.overview(j)"
                tal:content="structure python:view.overview(j)" >
-		       </div> <!-- end overview-->	            		       
-		        <div class="auxphoto" tal:condition="exists:python:view.auximage(j)" 
-		        	tal:content="structure python:view.auximage(j)">aux image</div>
-          <!-- end of auxphoto-->        	  
-		       <div class="parameters grid_6"  tal:condition="exists:python:view.parameters(j)"
-               tal:content="structure python:view.parameters(j)" >
-		       </div> <!-- end parameters-->
-	       
-            </div> <!--end of proditem-->
+		       </div> <!-- end overview--> 
+		       </div> <!--end of proditem-->
+            </div>
             <div class="clear"></div>            
 		     </div> <!-- end of tal:define-->
 		 </div><!--end of multiproducts -->

@@ -153,7 +153,35 @@ class baseview(grok.View):
             return b
         else:
             return c
-            
+        
+class BaseB2View(baseview):
+    grok.context(Iproductfolder)
+    grok.require('zope2.View')
+    grok.name('baseb2view')
+    
+    def col_class(self):
+#        import pdb
+#        pdb.set_trace()
+#        return "span" + str(12/self.PerRowPrdtNum)
+        return "span%s" % (str(12/self.PerRowPrdtNum))    
+    
+class BaseB3View(baseview):
+    grok.context(Iproductfolder)
+    grok.require('zope2.View')
+    grok.name('baseb3view')
+                
+#python:(b_size + cols - 1)/cols;
+
+    def rows_perpage(self):
+        rows = (self.PerPagePrdtNum + self.PerRowPrdtNum -1)/self.PerRowPrdtNum
+        return range(rows) 
+       
+    def col_class(self):
+#        import pdb
+#        pdb.set_trace()
+#        return "span" + str(12/self.PerRowPrdtNum)
+        return "col-xs-12 col-sm-6 col-md-%s" % (str(12/self.PerRowPrdtNum))
+      
 class BootstrapView(baseview):
     grok.context(Iproductfolder)
     grok.require('zope2.View')
@@ -250,6 +278,14 @@ class mediapageview(baseview):
             
         return output       
 
+class mediapagebootstrap3view(mediapageview):
+    grok.context(Iproductfolder)
+    grok.require('zope2.View')
+    grok.name('mediapageb3view')    
+
+    def span_num(self):
+
+        return "col-xs-12 col-md-%s" % (str(12/self.PerRowPrdtNum)) 
     
 class storeview(baseview):
     grok.context(Iproductfolder)

@@ -22,40 +22,48 @@
     <tal:main-macro metal:define-macro="content-core">
 		 <div tal:define="imglists python: view.mainimage(fieldname='image');
 		 	                loop python:imglists['preview'];
-		                  Batch python:modules['Products.CMFPlone'].Batch;
-                      b_size python:view.PerPagePrdtNum;
-		                  b_start python:0;
-                      b_start request/b_start | b_start;" 
-                      tal:omit-tag="" tal:condition="python: len(imglists)">
-		 <div tal:define="batch python:Batch(loop,b_size, int(b_start), orphan=0);" >
-		 <div metal:use-macro="context/batch_macros/macros/navigation" />		 
-        <div id="multiproducts">
-          <div tal:repeat = "img batch" tal:omit-tag="">
-             <div tal:define="j python:view.fetch_list_position(loop,img)" class="proditem">
-		        <h2 class="title">
+		 	                Batch python:modules['Products.CMFPlone'].Batch;
+		 	                cols python:view.PerRowPrdtNum;
+		 	                b_size python:view.PerPagePrdtNum;
+		 	                b_start python:0;
+		 	                b_start request/b_start | b_start;"
+		 	     tal:omit-tag=""
+		 	     tal:condition="python: len(imglists)">
+		 <div tal:define="batch python:Batch(loop,b_size, int(b_start), orphan=0);"
+		 		  tal:omit-tag="">
+		 <div class="row-fluid" metal:use-macro="context/batch_macros/macros/navigation" />       
+        <div class="row-fluid" 
+        	tal:define="subt python:len(batch);
+        						 rows python:(subt + cols - 1)/cols;"
+        	tal:repeat = "row python:range(rows)">
+        	<div tal:repeat="col python:range(cols)" tal:omit-tag="">
+             <div tal:define="r repeat/row/index;
+             									c repeat/col/index;
+             									k python:r * cols + c;
+             									j python:k + b_start;
+             								  disp python:(k <= b_size)"
+             			tal:condition="disp" class="proditem"
+             			tal:attributes="class python:view.col_class()">            	
+        			
+		        <h2 class="title row-fluid">
 		        	<a tal:content="python: imglists['title'][j]" tal:attributes="href python:imglists['imgurl'][j]">title</a>
               </h2>					 
-              <div class="mainphoto grid_3" tal:condition="exists:python:imglists['large'][j]">
-              <a href="#" tal:attributes="href python:imglists['large'][j]" class="jqzoom" tal:content="structure python:img"></a>
+              <div class="row-fluid">
+              <div class="span4" tal:condition="exists:python:imglists['large'][j]">
+              <a href="#" tal:attributes="href python:imglists['large'][j]" class="jqzoom" tal:content="structure python:imglists['preview'][j]"></a>
               </div>
-		       <div class="overview"  tal:condition="exists:python:view.overview(j)"
+		       <div class="span8"  tal:condition="exists:python:view.overview(j)"
                tal:content="structure python:view.overview(j)" >
-		       </div> <!-- end overview-->	            		       
-		        <div class="auxphoto" tal:condition="exists:python:view.auximage(j)" 
-		        	tal:content="structure python:view.auximage(j)">aux image</div>
-          <!-- end of auxphoto-->        	  
-		       <div class="parameters grid_6"  tal:condition="exists:python:view.parameters(j)"
-               tal:content="structure python:view.parameters(j)" >
-		       </div> <!-- end parameters-->
-	       
-            </div> <!--end of proditem-->
-            <div class="clear"></div>            
-		     </div> <!-- end of tal:define-->
-		 </div><!--end of multiproducts -->
-		   <div metal:use-macro="context/batch_macros/macros/navigation" />
-	   
-		 </div><!--end of define batch -->
-		</div>
+		       </div> <!-- end overview-->	
+		       </div>       	        	       
+            </div> <!--end of define-->
+          </div> <!--end of col define-->
+            
+           
+		     </div> <!-- end of row define-->
+
+		 </div><!--end of batch define -->	   
+		 </div><!--end of imglists define batch -->
     </tal:main-macro>
 </metal:main>
 <metal:js fill-slot="javascript_bottom_slot">

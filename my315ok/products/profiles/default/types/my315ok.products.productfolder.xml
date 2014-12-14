@@ -31,7 +31,10 @@
   <property name="default_view">view</property>
   <property name="view_methods">
    <element value="view"/>
+   <element value="baseb2view"/>     
+   <element value="baseb3view"/>   
    <element value="mediapageview"/>
+   <element value="mediapageb3view"/>   
    <element value="bootstrapview"/>    
    <element value="barsview"/>  
   </property>
