@@ -7,8 +7,10 @@ from my315ok.products.product import Iproduct
 from plone.memoize.instance import memoize
 from BeautifulSoup import BeautifulSoup as bt
 
+grok.templatedir('multiproducts_templates') 
 class baseview(grok.View):
     grok.context(Iproductfolder)
+    grok.template('baseview')    
     grok.require('zope2.View')
     grok.name('view')
 
@@ -156,6 +158,7 @@ class baseview(grok.View):
         
 class BaseB2View(baseview):
     grok.context(Iproductfolder)
+    grok.template('baseb2view')    
     grok.require('zope2.View')
     grok.name('baseb2view')
     
@@ -167,6 +170,7 @@ class BaseB2View(baseview):
     
 class BaseB3View(baseview):
     grok.context(Iproductfolder)
+    grok.template('baseb3view')    
     grok.require('zope2.View')
     grok.name('baseb3view')
                 
@@ -184,6 +188,7 @@ class BaseB3View(baseview):
       
 class BootstrapView(baseview):
     grok.context(Iproductfolder)
+    grok.template('bootstrapview')    
     grok.require('zope2.View')
     grok.name('bootstrapview')
 
@@ -246,6 +251,7 @@ class BootstrapView(baseview):
 class mediapageview(baseview):
     grok.context(Iproductfolder)
     grok.require('zope2.View')
+    grok.template('mediapageview')    
     grok.name('mediapageview')
     
     def outtable(self):
@@ -269,7 +275,6 @@ class mediapageview(baseview):
             output = output + rowstr
             for j in xrange(colsnum):
                 s2 = i * colsnum + j
-
                 if s2 == total:
                     break
                 output = output + '<div class="%s"><h2 class="title"><a title="%s" href="%s">%s</a></h2><div class="mainphoto grid_3"><a href="%s" title="%s" class="lightbox">%s</a></div></div>' \
@@ -280,15 +285,46 @@ class mediapageview(baseview):
 
 class mediapagebootstrap3view(mediapageview):
     grok.context(Iproductfolder)
+    grok.template('mediapageb3view')     
     grok.require('zope2.View')
     grok.name('mediapageb3view')    
 
+    def outtable(self):
+        out = """
+            <div class="row">
+            <div class="span2"> 
+            <h2 class="title"><a href="%s">%s</a></h2>                     
+            <div class="mainphoto grid_3"><a href="%s" title="%s" class="lightbox">%s</a></div>
+             </div>
+             </div>
+             """
+        output = ''
+        rowstr = '<div class="row">'
+        colsnum = self.PerRowPrdtNum
+        imglists = self.mainimage()
+        total = len(imglists['title'])
+        span_num = self.span_num()
+        rowsnum = (total + colsnum - 1)/colsnum
+
+        for i in xrange(rowsnum):
+            output = output + rowstr
+            for j in xrange(colsnum):
+                s2 = i * colsnum + j
+                if s2 == total:
+                    break
+                output = output + '<div class="%s"><h2 class="title"><a title="%s" href="%s">%s</a></h2><div class="mainphoto"><a href="%s" title="%s" data-lightbox="lightbox">%s</a></div></div>' \
+                %(span_num,imglists['title'][s2],imglists['imgurl'][s2],imglists['title'][s2],imglists['large'][s2],imglists['caption'][s2],imglists['preview'][s2])
+            output = output + '</div>'
+            
+        return output
+
     def span_num(self):
 
-        return "col-xs-12 col-md-%s" % (str(12/self.PerRowPrdtNum)) 
+        return "col-xs-12 col-sm-12 col-md-%s" % (str(12/self.PerRowPrdtNum)) 
     
 class storeview(baseview):
     grok.context(Iproductfolder)
+    grok.template('storeview')    
     grok.require('zope2.View')
     grok.name('storeview') 
         
@@ -310,6 +346,7 @@ class storeview(baseview):
           
 class barsview(baseview):
     grok.context(Iproductfolder)
+    grok.template('barsview')
     grok.require('zope2.View')
     grok.name('barsview')    
 
@@ -404,20 +441,24 @@ class barsview(baseview):
 
 class barsview_mini(barsview):
     grok.context(Iproductfolder)
+    grok.template('barsview_mini')    
     grok.require('zope2.View')
     grok.name('barsview_mini')  
     
 class barsview_thumb(barsview):
     grok.context(Iproductfolder)
+    grok.template('barsview_thumb')    
     grok.require('zope2.View')
     grok.name('barsview_thumb')
     
 class barsview_preview(barsview):
     grok.context(Iproductfolder)
+    grok.template('barsview_preview')    
     grok.require('zope2.View')
     grok.name('barsview_preview')            
 
 class barsview_orig(barsview):
     grok.context(Iproductfolder)
+    grok.template('barsview_orig')    
     grok.require('zope2.View')
     grok.name('barsview_orig')    
