@@ -7,6 +7,7 @@ from my315ok.products.product import Iproduct
 from plone.memoize.instance import memoize
 from BeautifulSoup import BeautifulSoup as bt
 
+
 grok.templatedir('multiproducts_templates') 
 class baseview(grok.View):
     grok.context(Iproductfolder)

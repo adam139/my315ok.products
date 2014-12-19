@@ -3,5 +3,11 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="my315ok.products">
 
-
+<browser:menuItem
+        for="my315ok.products.productfolder.Iproductfolder"
+        menu="plone_displayviews"
+        title="b3 table view"
+        action="@@mediapageb3view"
+        description="a table view of using bootstrap3 technology"
+        />
 </configure>

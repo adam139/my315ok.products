@@ -17,7 +17,7 @@ from plone.app.textfield import RichText
 
 #from z3c.relationfield.schema import RelationList, RelationChoice
 #from plone.formwidget.contenttree import ObjPathSourceBinder
-
+from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from my315ok.products import MessageFactory as _
 
 
