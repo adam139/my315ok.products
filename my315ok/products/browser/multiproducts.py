@@ -185,7 +185,7 @@ class BaseB3View(baseview):
 #        import pdb
 #        pdb.set_trace()
 #        return "span" + str(12/self.PerRowPrdtNum)
-        return "col-xs-12 col-sm-6 col-md-%s" % (str(12/self.PerRowPrdtNum))
+        return "col-xs-12 col-sm-6 col-md-%s text-center" % (str(12/self.PerRowPrdtNum))
       
 class BootstrapView(baseview):
     grok.context(Iproductfolder)
@@ -321,7 +321,7 @@ class mediapagebootstrap3view(mediapageview):
 
     def span_num(self):
 
-        return "col-xs-12 col-sm-12 col-md-%s" % (str(12/self.PerRowPrdtNum)) 
+        return "col-xs-12 col-sm-12 col-md-%s text-center" % (str(12/self.PerRowPrdtNum)) 
     
 class storeview(baseview):
     grok.context(Iproductfolder)
