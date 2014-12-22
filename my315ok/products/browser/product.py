@@ -25,14 +25,16 @@ class view(grok.View):
         """判断图片字段是否有效"""
 
         if brain is None:
-                obj = self.context
+            obj = self.context
+#            import pdb
+#            pdb.set_trace()
         else:
-                obj = brain.getObject()
+            obj = brain.getObject()
 
         try:
-                size = obj.image.size
+            size = obj.image.size
         except:
-                size = obj.image.getSize()                 
+            size = obj.image.getSize()                 
 
                  
         return (size != 0)
@@ -60,6 +62,7 @@ class view(grok.View):
     def img_large_link(self,fieldname="image",large="large"):
         link = self.img_url() + "/@@images/" + fieldname + "/" + large
         return link
+    
     def img_url(self):
         return self.context.absolute_url()
     
