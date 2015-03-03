@@ -7,14 +7,12 @@
       i18n:domain="my315ok.products">
 <head>
     <metal:block fill-slot="style_slot">
-        <link rel="stylesheet" type="text/css" 
-            tal:define="navroot context/@@plone_portal_state/navigation_root_url"
-            tal:attributes="href string:${navroot}/++resource++my315ok.products/css/jquery.jqzoom.css"
-            />  	
-        <link rel="stylesheet" type="text/css" 
+			<link rel="stylesheet" type="text/css" href="http://images.315ok.org/lightbox2-master/css/lightbox.css" media="screen" />           
+      
+     <!--  <link rel="stylesheet" type="text/css" 
             tal:define="navroot context/@@plone_portal_state/navigation_root_url"
             tal:attributes="href string:${navroot}/++resource++my315ok.products/multiproducts.css"
-            />
+            /> -->
     </metal:block>
 </head>      
 <body>
@@ -45,14 +43,14 @@
              			tal:condition="disp" class="proditem"
              			tal:attributes="class python:view.col_class()">            	
         			
-		        <h2 class="title row">
+		        <h2 class="title">
 		        	<a tal:content="python: imglists['title'][j]" tal:attributes="href python:imglists['imgurl'][j]">title</a>
               </h2>					 
               <div class="row">
               <div class="col-md-4" tal:condition="exists:python:imglists['large'][j]">
-              <a href="#" tal:attributes="href python:imglists['large'][j]" class="jqzoom" tal:content="structure python:imglists['preview'][j]"></a>
+              <a tal:attributes="href python:imglists['large'][j]" data-lightbox="lightbox" tal:content="structure python:imglists['preview'][j]"></a>
               </div>
-		       <div class="col-md-8"  tal:condition="exists:python:view.overview(j)"
+		       <div class="col-md-8 text-left"  tal:condition="exists:python:view.overview(j)"
                tal:content="structure python:view.overview(j)" >
 		       </div> <!-- end overview-->	
 		       </div>       	        	       
@@ -67,23 +65,25 @@
     </tal:main-macro>
 </metal:main>
 <metal:js fill-slot="javascript_bottom_slot">
-			<script type="text/javascript" src="test.js" 
-            tal:define="navroot context/@@plone_portal_state/navigation_root_url"
-            tal:attributes="src string:${navroot}/++resource++my315ok.products/js/jquery.jqzoom-core-pack.js">				
-			</script>
-		   <script type="text/javascript">
-        $(document).ready(function(){
-	         var options3 =
-            {
-                zoomWidth: 400,
-                zoomHeight: 350,
-                yOffset: -10,
-                title: false,
-                lens:false
-            }
-            $(".jqzoom").jqzoom(options3);
-                                      });
-       </script>	
+<script type="text/javascript" tal:attributes="src string:http://images.315ok.org/lightbox2-master/js/lightbox.min.js" />
+<script type="text/javascript">
+$(function() {
+	$('a.lightbox').lightBox(
+{
+	overlayBgColor: '#FFF',
+	overlayOpacity: 0.6,
+	imageLoading: 'http://images.315ok.org/images/lightbox-ico-loading.gif',
+	imageBtnClose: 'http://images.315ok.org/images/lightbox-btn-close.gif',
+	imageBtnPrev: 'http://images.315ok.org/images/lightbox-btn-prev.gif',
+	imageBtnNext: 'http://images.315ok.org/images/lightbox-btn-next.gif',
+	containerResizeSpeed: 350,
+	txtImage: '图片',
+	txtOf: '总共'	
+   }	
+	); 
+});
+</script>
+
 </metal:js>
 </body>
 </html>
