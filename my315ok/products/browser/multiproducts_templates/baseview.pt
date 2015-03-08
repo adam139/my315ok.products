@@ -26,7 +26,7 @@
                       b_size python:view.PerPagePrdtNum;
 		                  b_start python:0;
                       b_start request/b_start | b_start;" 
-                      tal:omit-tag="" tal:condition="python: len(imglists)">
+                      tal:omit-tag="" tal:condition="python: len(loop)">
 		 <div tal:define="batch python:Batch(loop,b_size, int(b_start), orphan=0);" >
 		 <div metal:use-macro="context/batch_macros/macros/navigation" />		 
         <div id="multiproducts">

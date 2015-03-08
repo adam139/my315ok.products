@@ -21,10 +21,10 @@ class baseview(grok.View):
         if item in lt:
             for i in xrange(len(lt)):
                 if lt[i] == item:
-                    break
+                    return i
                 else:
                     continue
-            return i
+#            return i
         else:
             return 0                
         
@@ -101,6 +101,7 @@ class baseview(grok.View):
     
     def mainimage(self,fieldname="image"):
         main = self.img_fast_tag("image")
+
         return main
     
 # bt is beautiful soup ,small picture come from rich text field's img tag      
@@ -179,6 +180,7 @@ class BaseB3View(baseview):
 
     def rows_perpage(self):
         rows = (self.PerPagePrdtNum + self.PerRowPrdtNum -1)/self.PerRowPrdtNum
+
         return range(rows) 
        
     def col_class(self):

@@ -1,27 +1,12 @@
 from five import grok
 from plone.directives import dexterity, form
 from plone.multilingualbehavior import directives
-
 from zope import schema
 from zope.component import queryUtility
-from zope.schema.interfaces import IContextSourceBinder
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from plone.indexer import indexer
-from plone.memoize.instance import memoize
-
-from zope.interface import invariant, Invalid
-
-from z3c.form import group, field
-
 from plone.namedfile.interfaces import IImageScaleTraversable
-from plone.namedfile.field import NamedImage, NamedFile
-from plone.namedfile.field import NamedBlobImage, NamedBlobFile
-
+from plone.namedfile.field import NamedBlobImage
 from plone.app.textfield import RichText
-#
-#from z3c.relationfield.schema import RelationList, RelationChoice
-#from plone.formwidget.contenttree import ObjPathSourceBinder
-
 from my315ok.products import MessageFactory as _
 #from my315ok.products.interfaces import IMy315okProductsSettings 
 #from plone.registry.interfaces import IRegistry
@@ -79,7 +64,7 @@ def linkurl(context):
     """Create a catalogue indexer, registered as an adapter, which can
     populate the ``content`` index with the linkutrl .
     """
-    pview = context.restrictedTraverse('@@plone')
+
 
     try:
         url = context.linkurl

@@ -11,44 +11,29 @@ class view(grok.View):
     grok.require('zope2.View')
     grok.name('view')
 
-#    def update(self):
-#        """
-#        """
-#        # Hide the editable-object border
-##        context = self.context
-##        request = self.request
-#        self.request.set('disable_border', True)
-##        catalog = getToolByName(self.context, 'portal_catalog')
-        
-#brain come from contained image field 's object
+    @memoize
     def isImageAvalable(self,brain=None):
         """判断图片字段是否有效"""
 
         if brain is None:
             obj = self.context
-#            import pdb
-#            pdb.set_trace()
         else:
             obj = brain.getObject()
-
         try:
             size = obj.image.size
         except:
             size = obj.image.getSize()                 
-
-                 
         return (size != 0)
 
         
     def transfer2text(self,obj):
-#        import pdb
-#        pdb.set_trace()
         try:
             res = obj.output
             return res
         except:
             return obj
- 
+        
+    @memoize
     def img_tag(self,scale=None,fieldname="image"):
         scales = getMultiAdapter((self.context, self.request), name='images')
         if scale == None:
@@ -64,7 +49,5 @@ class view(grok.View):
         return link
     
     def img_url(self):
-        return self.context.absolute_url()
-    
-  
+        return self.context.absolute_url()  
             

@@ -19,30 +19,30 @@
 <metal:main fill-slot="content-core">
     <tal:main-macro metal:define-macro="content-core">
 		 <div tal:define="imglists python: view.mainimage(fieldname='image');
-		 	                loop python:imglists['preview'];
+		 	                loop python:imglists['preview'];		 	
+		 								 total python:len(loop);
 		 	                Batch python:modules['Products.CMFPlone'].Batch;
 		 	                cols python:view.PerRowPrdtNum;
 		 	                b_size python:view.PerPagePrdtNum;
 		 	                b_start python:0;
 		 	                b_start request/b_start | b_start;"
 		 	     tal:omit-tag=""
-		 	     tal:condition="python: len(imglists)">
+		 	     tal:condition="total">
 		 <div tal:define="batch python:Batch(loop,b_size, int(b_start), orphan=0);"
 		 		  tal:omit-tag="">
 		 <div class="row" metal:use-macro="context/batch_macros/macros/navigation" />       
         <div class="row" 
-        	tal:define="subt python:len(batch);
-        						 rows python:(subt + cols - 1)/cols;"
-        	tal:repeat = "row python:range(rows)">
+        	
+        	tal:repeat = "row python:view.rows_perpage()">
         	<div tal:repeat="col python:range(cols)" tal:omit-tag="">
              <div tal:define="r repeat/row/index;
              									c repeat/col/index;
              									k python:r * cols + c;
              									j python:k + b_start;
-             								  disp python:(k <= b_size)"
-             			tal:condition="disp" class="proditem"
+             								  disp python:(k < b_size) and (j < total)"
+             			class="proditem"
              			tal:attributes="class python:view.col_class()">            	
-        			
+        			<div tal:omit-tag="" tal:condition="disp">
 		        <h2 class="title">
 		        	<a tal:content="python: imglists['title'][j]" tal:attributes="href python:imglists['imgurl'][j]">title</a>
               </h2>					 
@@ -55,8 +55,8 @@
 		       </div> <!-- end overview-->	
 		       </div>       	        	       
             </div> <!--end of define-->
-          </div> <!--end of col define-->
-            
+            </div>
+          </div> <!--end of col define-->           
            
 		     </div> <!-- end of row define-->
 

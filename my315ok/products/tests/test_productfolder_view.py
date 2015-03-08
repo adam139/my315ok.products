@@ -59,15 +59,14 @@ class TestProductsFolderView(unittest.TestCase):
 
         
         import transaction
-        transaction.commit()
-        
-        page = portal.absolute_url() + '/productfolder1'
+        transaction.commit()        
+        page = portal.absolute_url() + '/productfolder1/@@view'
 
         browser.open(page)
 
 #        open('/tmp/test.html', 'w').write(browser.contents)
 
-        self.assertTrue('<div id="multiproducts">' in browser.contents)
+        self.assertTrue('data-lightbox="lightbox"' in browser.contents)
 
     def test_bootstrapview(self):
         app = self.layer['app']
