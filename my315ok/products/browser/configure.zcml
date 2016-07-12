@@ -3,11 +3,110 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="my315ok.products">
 
-<browser:menuItem
-        for="my315ok.products.productfolder.Iproductfolder"
-        menu="plone_displayviews"
-        title="b3 table view"
-        action="@@mediapageb3view"
-        description="a table view of using bootstrap3 technology"
-        />
+  <browser:page
+    for="my315ok.products.productfolder.Iproductfolder"
+    class=".multiproducts.baseview"
+    template="multiproducts_templates/baseview.pt"
+    name="baseview"
+    permission="zope.Public"
+    />
+
+  <browser:page
+    for="my315ok.products.productfolder.Iproductfolder"
+    class=".multiproducts.BootstrapView"
+    template="multiproducts_templates/bootstrapview.pt"
+    name="bootstrapview"
+    permission="zope.Public"
+    menu="plone_displayviews"
+    title="Bootstrap view"
+    />    
+
+  <browser:page
+    for="my315ok.products.productfolder.Iproductfolder"
+    class=".multiproducts.BaseB2View"
+    template="multiproducts_templates/baseb2view.pt"
+    name="baseb2view"
+    permission="zope.Public"
+    menu="plone_displayviews"
+    title="BootstrapV2 view"
+    />
+  <browser:page
+    for="my315ok.products.productfolder.Iproductfolder"
+    class=".multiproducts.BaseB3View"
+    template="multiproducts_templates/baseb3view.pt"
+    name="baseb3view"
+    permission="zope.Public"
+    menu="plone_displayviews"
+    title="BootstrapV3 view"
+    />
+  <browser:page
+    for="my315ok.products.productfolder.Iproductfolder"
+    class=".multiproducts.mediapageview"
+    template="multiproducts_templates/mediapageview.pt"
+    name="mediapageview"
+    permission="zope.Public"
+    menu="plone_displayviews"
+    title="mediapage view"
+    />    
+
+  <browser:page
+    for="my315ok.products.productfolder.Iproductfolder"
+    class=".multiproducts.mediapagebootstrap3view"
+    template="multiproducts_templates/mediapageb3view.pt"
+    name="mediapageb3view"
+    permission="zope.Public"
+    menu="plone_displayviews"
+    title="Mediapage b3 view"
+    />
+  <browser:page
+    for="my315ok.products.productfolder.Iproductfolder"
+    class=".multiproducts.storeview"
+    template="multiproducts_templates/storeview.pt"
+    name="storeview"
+    permission="zope.Public"
+    menu="plone_displayviews"
+    title="store view"
+    /> 
+  <browser:pages
+    for="my315ok.products.productfolder.Iproductfolder"
+    class=".multiproducts.barsview"       
+    permission="zope.Public">
+  <browser:page
+    template="multiproducts_templates/barsview.pt"
+    name="barsview"
+    />
+  <browser:page
+    template="multiproducts_templates/barsview_thumb.pt"
+    name="barsview_thumb"
+    menu="plone_displayviews"
+    title="thumb view"
+    />    
+  <browser:page
+    template="multiproducts_templates/barsview_mini.pt"
+    name="barsview_mini"
+    menu="plone_displayviews"
+    title="mini view"
+    />
+  <browser:page
+    template="multiproducts_templates/barsview_preview.pt"
+    name="barsview_preview"
+    menu="plone_displayviews"
+    title="preview view"
+    />
+  <browser:page
+    template="multiproducts_templates/barsview_orig.pt"
+    name="barsview_orig"
+    menu="plone_displayviews"
+    title="origin view"
+    />                  
+  </browser:pages>
+  <browser:page
+    for="my315ok.products.product.Iproduct"
+    class=".product.view"
+    template="product_templates/view.pt"
+    name="view"
+    permission="zope.Public"
+    menu="plone_displayviews"
+    title="product view"
+    />               
 </configure>

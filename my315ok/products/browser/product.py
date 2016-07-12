@@ -1,15 +1,16 @@
 #-*- coding: UTF-8 -*-
-from five import grok
+# from five import grok
 from Acquisition import aq_inner
 from zope.component import getMultiAdapter
 from Products.CMFCore.utils import getToolByName
 from plone.memoize.instance import memoize
-from my315ok.products.product import Iproduct 
+from my315ok.products.product import Iproduct
+from Products.Five.browser import BrowserView 
 
-class view(grok.View):
-    grok.context(Iproduct)
-    grok.require('zope2.View')
-    grok.name('view')
+class view(BrowserView):
+#     grok.context(Iproduct)
+#     grok.require('zope2.View')
+#     grok.name('view')
 
     @memoize
     def isImageAvalable(self,brain=None):

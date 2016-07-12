@@ -3,5 +3,24 @@
   <!-- Create records for our settings -->
     
   <records interface="my315ok.products.interfaces.IMy315okProductsSettings" />
+<!-- Resources -->
+  <records prefix="plone.resources/jqzoom"
+            interface='Products.CMFPlone.interfaces.IResourceRegistry'>
+      <value key="js">++resource++my315ok.products/js/jquery.jqzoom-core-pack.js</value>
+      <value key="css">
+        <element>++resource++my315ok.products/css/jquery.jqzoom.css</element>
+      </value>
+      <value key="deps">jquery</value>
+ </records>
 
+     <!-- Bundles -->
+  <records prefix="plone.bundles/my315ok-products-b3"
+            interface='Products.CMFPlone.interfaces.IBundleRegistry'>    
+    <value key="depends">plone</value>
+    <value key="jscompilation">++resource++my315ok.products/js/jqzoom-init.js</value>
+    <value key="csscompilation">++resource++my315ok.products/multiproducts.css</value>
+    <value key="last_compilation">2015-08-14 00:00:00</value>
+    <value key="compile">False</value>
+    <value key="enabled">False</value>   
+  </records>
 </registry>

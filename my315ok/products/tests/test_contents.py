@@ -1,4 +1,4 @@
-import unittest2 as unittest
+import unittest
 
 from my315ok.products.testing import MY315OK_PRODUCTS_INTEGRATION_TESTING
 from plone.app.testing import TEST_USER_ID, setRoles

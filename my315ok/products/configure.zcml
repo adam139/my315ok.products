@@ -11,7 +11,7 @@
   <!-- Include configuration for dependencies listed in setup.py -->
   <includeDependencies package="." />
   <include package=".browser" /> 
-  <include package=".portlets" /> 
+  <!-- <include package=".portlets" /> --> 
   <include file="caching.zcml" />    
   <!-- Grok the package to initialise schema interfaces and content classes -->
   <grok:grok package="." />

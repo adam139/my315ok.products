@@ -1,6 +1,7 @@
 from five import grok
 from plone.directives import dexterity, form
-from plone.multilingualbehavior import directives
+# from plone.multilingualbehavior import directives
+from plone.app.multilingual.dx import directives
 from zope import schema
 from zope.component import queryUtility
 from plone.indexer import indexer

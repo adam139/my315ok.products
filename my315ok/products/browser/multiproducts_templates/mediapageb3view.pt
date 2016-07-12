@@ -17,7 +17,7 @@
 		 </div>
 </metal:main>
 <metal:js fill-slot="javascript_bottom_slot">
-			   <script type="text/javascript" tal:attributes="src string:http://images.315ok.org/lightbox2-master/js/lightbox.min.js" />
+<script type="text/javascript" tal:attributes="src string:http://images.315ok.org/lightbox2-master/js/lightbox.min.js" />
 <script type="text/javascript">
 $(function() {
 	$('a.lightbox').lightBox(
@@ -35,7 +35,6 @@ $(function() {
 	); 
 });
 </script>
-
 </metal:js>
 </body>
 </html>

@@ -1,19 +1,21 @@
 #-*- coding: UTF-8 -*-
-from five import grok
+# from five import grok
 from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
+from Products.Five.browser import BrowserView
 from my315ok.products.productfolder import Iproductfolder
 from my315ok.products.product import Iproduct
 from plone.memoize.instance import memoize
 from BeautifulSoup import BeautifulSoup as bt
+from Products.CMFPlone.resources import add_bundle_on_request
 
 
-grok.templatedir('multiproducts_templates') 
-class baseview(grok.View):
-    grok.context(Iproductfolder)
-    grok.template('baseview')    
-    grok.require('zope2.View')
-    grok.name('baseview')
+# grok.templatedir('multiproducts_templates') 
+class baseview(BrowserView):
+#     grok.context(Iproductfolder)
+#     grok.template('baseview')    
+#     grok.require('zope2.View')
+#     grok.name('baseview')
 
 #<img src="" tal:attributes="src string:${item/getURL}/@@images/image/thumb" />
 
@@ -159,10 +161,10 @@ class baseview(grok.View):
             return c
         
 class BaseB2View(baseview):
-    grok.context(Iproductfolder)
-    grok.template('baseb2view')    
-    grok.require('zope2.View')
-    grok.name('baseb2view')
+#     grok.context(Iproductfolder)
+#     grok.template('baseb2view')    
+#     grok.require('zope2.View')
+#     grok.name('baseb2view')
     
     def col_class(self):
 #        import pdb
@@ -171,13 +173,19 @@ class BaseB2View(baseview):
         return "span%s" % (str(12/self.PerRowPrdtNum))    
     
 class BaseB3View(baseview):
-    grok.context(Iproductfolder)
-    grok.template('baseb3view')    
-    grok.require('zope2.View')
-    grok.name('view')
+#     grok.context(Iproductfolder)
+#     grok.template('baseb3view')    
+#     grok.require('zope2.View')
+#     grok.name('view')
                 
 #python:(b_size + cols - 1)/cols;
 
+    def __init__(self,context, request):
+        # Each view instance receives context and request as construction parameters
+        self.context = context
+        self.request = request
+        add_bundle_on_request(self.request, 'my315ok-products-b3')
+            
     def rows_perpage(self):
         rows = (self.PerPagePrdtNum + self.PerRowPrdtNum -1)/self.PerRowPrdtNum
 
@@ -190,10 +198,10 @@ class BaseB3View(baseview):
         return "col-xs-12 col-sm-%s text-center" % (str(12/self.PerRowPrdtNum))
       
 class BootstrapView(baseview):
-    grok.context(Iproductfolder)
-    grok.template('bootstrapview')    
-    grok.require('zope2.View')
-    grok.name('bootstrapview')
+#     grok.context(Iproductfolder)
+#     grok.template('bootstrapview')    
+#     grok.require('zope2.View')
+#     grok.name('bootstrapview')
 
     @memoize
     def outtable(self):
@@ -252,10 +260,10 @@ class BootstrapView(baseview):
         
 
 class mediapageview(baseview):
-    grok.context(Iproductfolder)
-    grok.require('zope2.View')
-    grok.template('mediapageview')    
-    grok.name('mediapageview')
+#     grok.context(Iproductfolder)
+#     grok.require('zope2.View')
+#     grok.template('mediapageview')    
+#     grok.name('mediapageview')
     
     def outtable(self):
         out = """
@@ -287,10 +295,10 @@ class mediapageview(baseview):
         return output       
 
 class mediapagebootstrap3view(mediapageview):
-    grok.context(Iproductfolder)
-    grok.template('mediapageb3view')     
-    grok.require('zope2.View')
-    grok.name('mediapageb3view')    
+#     grok.context(Iproductfolder)
+#     grok.template('mediapageb3view')     
+#     grok.require('zope2.View')
+#     grok.name('mediapageb3view')    
 
     def outtable(self):
         out = """
@@ -326,10 +334,10 @@ class mediapagebootstrap3view(mediapageview):
         return "col-xs-12 col-sm-12 col-md-%s text-center" % (str(12/self.PerRowPrdtNum)) 
     
 class storeview(baseview):
-    grok.context(Iproductfolder)
-    grok.template('storeview')    
-    grok.require('zope2.View')
-    grok.name('storeview') 
+#     grok.context(Iproductfolder)
+#     grok.template('storeview')    
+#     grok.require('zope2.View')
+#     grok.name('storeview') 
         
     @memoize
     def swich_img(self):
@@ -348,10 +356,10 @@ class storeview(baseview):
             
           
 class barsview(baseview):
-    grok.context(Iproductfolder)
-    grok.template('barsview')
-    grok.require('zope2.View')
-    grok.name('barsview')    
+#     grok.context(Iproductfolder)
+#     grok.template('barsview')
+#     grok.require('zope2.View')
+#     grok.name('barsview')    
 
     @memoize
     def barview(self,scale="large",multiline=False):
@@ -441,27 +449,3 @@ class barsview(baseview):
         dsptxt = dsptxt + dsptxtend
         return dsptxt   
 
-
-class barsview_mini(barsview):
-    grok.context(Iproductfolder)
-    grok.template('barsview_mini')    
-    grok.require('zope2.View')
-    grok.name('barsview_mini')  
-    
-class barsview_thumb(barsview):
-    grok.context(Iproductfolder)
-    grok.template('barsview_thumb')    
-    grok.require('zope2.View')
-    grok.name('barsview_thumb')
-    
-class barsview_preview(barsview):
-    grok.context(Iproductfolder)
-    grok.template('barsview_preview')    
-    grok.require('zope2.View')
-    grok.name('barsview_preview')            
-
-class barsview_orig(barsview):
-    grok.context(Iproductfolder)
-    grok.template('barsview_orig')    
-    grok.require('zope2.View')
-    grok.name('barsview_orig')    

@@ -7,8 +7,11 @@
       i18n:domain="my315ok.products">
 <head>
     <metal:block fill-slot="style_slot">
+    <?python
+    from plone import api
+    navroot = api.portal.get().absolute_url()
+    ?>    
         <link rel="stylesheet" type="text/css" 
-            tal:define="navroot context/@@plone_portal_state/navigation_root_url"
             tal:attributes="href string:${navroot}/++resource++my315ok.products/multiproducts.css"
             />
         <link rel="stylesheet" type="text/css" href="http://images.315ok.org/jquery.lightbox-0.5.css" media="screen" />           
@@ -17,10 +20,7 @@
 <body>
 
 <metal:main fill-slot="content-core">
-    <tal:main-macro metal:define-macro="content-core"
-        tal:define="toLocalizedTime nocall:context/@@plone/toLocalizedTime;plone_state context/@@plone_portal_state;
-                                                                              portal python:plone_state.portal()">		
-	 
+    <tal:main-macro metal:define-macro="content-core">	 
         <div id="multiproducts" tal:content="structure python:view.outtable()">         
 		 </div><!--end of multiproducts -->		
     </tal:main-macro>

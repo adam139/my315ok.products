@@ -5,18 +5,7 @@
       lang="en"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="my315ok.products">
-<head>
-    <metal:block fill-slot="style_slot">
-        <link rel="stylesheet" type="text/css" 
-            tal:define="navroot context/@@plone_portal_state/navigation_root_url"
-            tal:attributes="href string:${navroot}/++resource++my315ok.products/css/jquery.jqzoom.css"
-            />  	
-        <link rel="stylesheet" type="text/css" 
-            tal:define="navroot context/@@plone_portal_state/navigation_root_url"
-            tal:attributes="href string:${navroot}/++resource++my315ok.products/multiproducts.css"
-            />
-    </metal:block>
-</head>      
+>      
 <body>
 <metal:main fill-slot="content-core">
     <tal:main-macro metal:define-macro="content-core">
@@ -47,30 +36,11 @@
             <div class="clear"></div>            
 		     </div> <!-- end of tal:define-->
 		 </div><!--end of multiproducts -->
-		   <div metal:use-macro="context/batch_macros/macros/navigation" />
+		 <div metal:use-macro="context/batch_macros/macros/navigation" />
 	   
 		 </div><!--end of define batch -->
 		</div>
     </tal:main-macro>
 </metal:main>
-<metal:js fill-slot="javascript_bottom_slot">
-			<script type="text/javascript" src="test.js" 
-            tal:define="navroot context/@@plone_portal_state/navigation_root_url"
-            tal:attributes="src string:${navroot}/++resource++my315ok.products/js/jquery.jqzoom-core-pack.js">				
-			</script>
-		   <script type="text/javascript">
-        $(document).ready(function(){
-	         var options3 =
-            {
-                zoomWidth: 400,
-                zoomHeight: 350,
-                yOffset: -10,
-                title: false,
-                lens:false
-            }
-            $(".jqzoom").jqzoom(options3);
-                                      });
-       </script>	
-</metal:js>
 </body>
 </html>

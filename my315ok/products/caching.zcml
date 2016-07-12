@@ -9,31 +9,14 @@
         for=".browser.multiproducts.baseview"
         ruleset="plone.content.folderView"
         />
-    
-    <cache:ruleset
-        for=".browser.multiproducts.barsview_mini"
-        ruleset="plone.content.folderView"
-        />
-    
-    <cache:ruleset
-        for=".browser.multiproducts.barsview_orig"
-        ruleset="plone.content.folderView"
-        />
+
     
     <cache:ruleset
         for=".browser.multiproducts.barsview"
         ruleset="plone.content.folderView"
         />
     
-    <cache:ruleset
-        for=".browser.multiproducts.barsview_preview"
-        ruleset="plone.content.folderView"
-        />
-    
-    <cache:ruleset
-        for=".browser.multiproducts.barsview_thumb"
-        ruleset="plone.content.folderView"
-        />
+
     
     <cache:ruleset
         for=".browser.product.view"
