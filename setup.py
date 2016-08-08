@@ -43,7 +43,7 @@ setup(name='my315ok.products',
           'zope.component',
           'rwproperty',
 #           'plone.multilingualbehavior',
-#           'plone.multilingual',                            
+           'plone.multilingual',                            
 #          'plone.app.referenceablebehavior',
 #          'plone.app.relationfield',          
           # -*- Extra requirements: -*-

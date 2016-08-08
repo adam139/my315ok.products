@@ -7,12 +7,8 @@
       i18n:domain="my315ok.products">
 <head>
     <metal:block fill-slot="style_slot">
-			<link rel="stylesheet" type="text/css" href="http://images.315ok.org/lightbox2-master/css/lightbox.css" media="screen" />           
-      
-     <!--  <link rel="stylesheet" type="text/css" 
-            tal:define="navroot context/@@plone_portal_state/navigation_root_url"
-            tal:attributes="href string:${navroot}/++resource++my315ok.products/multiproducts.css"
-            /> -->
+			<link rel="stylesheet" type="text/css" href="http://images.315ok.org/lightbox2-master/css/lightbox.css" media="screen" />         
+
     </metal:block>
 </head>      
 <body>

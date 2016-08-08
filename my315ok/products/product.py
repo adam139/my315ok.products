@@ -28,11 +28,7 @@ class Iproduct(form.Schema, IImageScaleTraversable):
     a product content that contain product image,rich text product spec and product parameters table etc.
     """
     
-    # If you want a schema-defined interface, delete the form.model
-    # line below and delete the matching file in the models sub-directory.
-    # If you want a model-based interface, edit
-    # models/product.xml to define the content type
-    # and add directives here as necessary.
+
     directives.languageindependent('image')
     image = NamedBlobImage(
         title=_(u"product image"),
@@ -47,13 +43,7 @@ class Iproduct(form.Schema, IImageScaleTraversable):
             required=True,
         )
 
-#    form.model("models/product.xml")
 
-
-# Custom content-type class; objects created for this content type will
-# be instances of this class. Use this class to add content-type specific
-# methods and properties. Put methods that are mainly useful for rendering
-# in separate view classes.
 
 class product(dexterity.Item):
     grok.implements(Iproduct)
@@ -63,10 +53,10 @@ class product(dexterity.Item):
 @indexer(Iproduct)
 def linkurl(context):
     """Create a catalogue indexer, registered as an adapter, which can
-    populate the ``content`` index with the linkutrl .
+    populate the ``content`` index with the linkurl .
     """
 
-
+    if not Iproduct.providedBy(context):return ""
     try:
         url = context.linkurl
     except:
@@ -78,8 +68,9 @@ def linkurl(context):
 @indexer(Iproduct)
 def text(context):
     """Create a catalogue indexer, registered as an adapter, which can
-    populate the ``content`` index with the answer .
+    populate the ``content`` index with text .
     """
+    if not Iproduct.providedBy(context):return ""
     pview = context.restrictedTraverse('@@plone')
 
     try:
