@@ -56,7 +56,7 @@ def linkurl(context):
     populate the ``content`` index with the linkurl .
     """
 
-    if not Iproduct.providedBy(context):return ""
+#     if not Iproduct.providedBy(context):return ""
     try:
         url = context.linkurl
     except:
@@ -70,7 +70,7 @@ def text(context):
     """Create a catalogue indexer, registered as an adapter, which can
     populate the ``content`` index with text .
     """
-    if not Iproduct.providedBy(context):return ""
+#     if not Iproduct.providedBy(context):return ""
     pview = context.restrictedTraverse('@@plone')
 
     try:

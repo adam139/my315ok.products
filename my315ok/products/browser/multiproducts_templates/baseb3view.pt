@@ -17,7 +17,7 @@
 		 <div tal:define="imglists python: view.mainimage(fieldname='image');
 		 	                loop python:imglists['preview'];		 	
 		 								 total python:len(loop);
-		 	                Batch python:modules['Products.CMFPlone'].Batch;
+		 	                Batch python:modules['plone.batching'].Batch;
 		 	                cols python:view.PerRowPrdtNum;
 		 	                b_size python:view.PerPagePrdtNum;
 		 	                b_start python:0;
@@ -26,9 +26,14 @@
 		 	     tal:condition="total">
 		 <div tal:define="batch python:Batch(loop,b_size, int(b_start), orphan=0);"
 		 		  tal:omit-tag="">
+		 		  <div class="row"><tal:batchnavigation
+    define="batchnavigation nocall:context/@@batchnavigation"
+    replace="structure python:batchnavigation(batch)" />
+    </div>
+    <!--
 		 <div class="row" metal:use-macro="context/batch_macros/macros/navigation" />       
-        <div class="row" 
-        	
+       -->
+        <div class="row"        	
         	tal:repeat = "row python:view.rows_perpage()">
         	<div tal:repeat="col python:range(cols)" tal:omit-tag="">
              <div tal:define="r repeat/row/index;
@@ -79,7 +84,6 @@ $(function() {
 	); 
 });
 </script>
-
 </metal:js>
 </body>
 </html>
