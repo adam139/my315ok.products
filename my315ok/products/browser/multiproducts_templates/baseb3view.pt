@@ -26,10 +26,11 @@
 		 	     tal:condition="total">
 		 <div tal:define="batch python:Batch(loop,b_size, int(b_start), orphan=0);"
 		 		  tal:omit-tag="">
-		 		  <div class="row"><tal:batchnavigation
-    define="batchnavigation nocall:context/@@batchnavigation"
-    replace="structure python:batchnavigation(batch)" />
-    </div>
+		 	<div class="row">
+		 		<tal:batchnavigation
+    			define="batchnavigation nocall:context/@@batchnavigation"
+    			replace="structure python:batchnavigation(batch)" />
+    		</div>
     <!--
 		 <div class="row" metal:use-macro="context/batch_macros/macros/navigation" />       
        -->

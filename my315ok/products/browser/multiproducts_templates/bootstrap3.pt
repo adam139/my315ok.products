@@ -11,13 +11,15 @@
     <tal:main-macro metal:define-macro="content-core">
 		 <div tal:define="imglists python: view.mainimage(fieldname='image');
 		 	                loop python:imglists['preview'];
-		                  Batch python:modules['Products.CMFPlone'].Batch;
+		                  Batch python:modules['plone.batching'].Batch;
                       b_size python:view.PerPagePrdtNum;
 		                  b_start python:0;
                       b_start request/b_start | b_start;" 
                       tal:omit-tag="" tal:condition="python: len(loop)">
 		 <div tal:define="batch python:Batch(loop,b_size, int(b_start), orphan=0);" >
-		 <div metal:use-macro="context/batch_macros/macros/navigation" />		 
+		 	<!--
+		 <div metal:use-macro="context/batch_macros/macros/navigation" />
+		 -->		 
         <div id="multiproducts" class="row">
           <div tal:repeat = "img batch" tal:omit-tag="">
              <div tal:define="j python:view.fetch_list_position(loop,img)" class="col-md-12">
@@ -36,7 +38,12 @@
             <div class="clear"></div>            
 		     </div> <!-- end of tal:define-->
 		 </div><!--end of multiproducts -->
-		 <div metal:use-macro="context/batch_macros/macros/navigation" />
+		 <!-- <div metal:use-macro="context/batch_macros/macros/navigation" /> -->
+		 <div class="row">
+		 	<tal:batchnavigation
+    			define="batchnavigation nocall:context/@@batchnavigation"
+    			replace="structure python:batchnavigation(batch)" />
+    	</div>
 	   
 		 </div><!--end of define batch -->
 		</div>
