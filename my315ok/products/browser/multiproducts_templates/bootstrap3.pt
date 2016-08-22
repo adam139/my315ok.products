@@ -5,7 +5,11 @@
       lang="en"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="my315ok.products">
->      
+<head>
+    <metal:block fill-slot="style_slot">
+        <link rel="stylesheet" type="text/css" href="http://images.315ok.org/lightbox2-master/css/lightbox.css" media="screen" />           
+    </metal:block>
+</head>   
 <body>
 <metal:main fill-slot="content-core">
     <tal:main-macro metal:define-macro="content-core">
@@ -16,23 +20,24 @@
 		                  b_start python:0;
                       b_start request/b_start | b_start;" 
                       tal:omit-tag="" tal:condition="python: len(loop)">
-		 <div tal:define="batch python:Batch(loop,b_size, int(b_start), orphan=0);" >
-		 	<!--
-		 <div metal:use-macro="context/batch_macros/macros/navigation" />
-		 -->		 
+		 <div tal:define="batch python:Batch(loop,b_size, int(b_start), orphan=0);" >	 
         <div id="multiproducts" class="row">
           <div tal:repeat = "img batch" tal:omit-tag="">
              <div tal:define="j python:view.fetch_list_position(loop,img)" class="col-md-12">
              	<div class="row">
 		        <h2 class="title">
 		        	<a tal:content="python: imglists['title'][j]" tal:attributes="href python:imglists['imgurl'][j]">title</a>
-              </h2>					 
-              <div class="col-xs-12 col-md-4" tal:condition="exists:python:imglists['large'][j]">
-              <a href="#" tal:attributes="href python:imglists['large'][j]" class="jqzoom" tal:content="structure python:img"></a>
-              </div>
+              </h2>
 		       <div class="col-xs-12 col-md-8"  tal:condition="exists:python:view.overview(j)"
                tal:content="structure python:view.overview(j)" >
-		       </div> <!-- end overview--> 
+		       </div>               					 
+              <div class="col-xs-12 col-md-4" tal:condition="exists:python:imglists['large'][j]">
+              <a href="#" tal:attributes="href python:imglists['large'][j]" 
+              	class="jqzoom" 
+              	data-lightbox="lightbox" 
+              	tal:content="structure python:img"></a>
+              </div>
+					<!-- end overview--> 
 		       </div> <!--end of proditem-->
             </div>
             <div class="clear"></div>            
@@ -49,5 +54,25 @@
 		</div>
     </tal:main-macro>
 </metal:main>
+<metal:js fill-slot="javascript_bottom_slot">
+<script type="text/javascript" tal:attributes="src string:http://images.315ok.org/lightbox2-master/js/lightbox.min.js" />
+<script type="text/javascript">
+$(function() {
+	$('a.lightbox').lightBox(
+{
+	overlayBgColor: '#FFF',
+	overlayOpacity: 0.6,
+	imageLoading: 'http://images.315ok.org/images/lightbox-ico-loading.gif',
+	imageBtnClose: 'http://images.315ok.org/images/lightbox-btn-close.gif',
+	imageBtnPrev: 'http://images.315ok.org/images/lightbox-btn-prev.gif',
+	imageBtnNext: 'http://images.315ok.org/images/lightbox-btn-next.gif',
+	containerResizeSpeed: 350,
+	txtImage: '图片',
+	txtOf: '总共'	
+   }	
+	); 
+});
+</script>
+</metal:js>
 </body>
 </html>

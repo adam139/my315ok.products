@@ -7,7 +7,7 @@ from my315ok.products.productfolder import Iproductfolder
 from my315ok.products.product import Iproduct
 from plone.memoize.instance import memoize
 from BeautifulSoup import BeautifulSoup as bt
-from Products.CMFPlone.resources import add_bundle_on_request
+from Products.CMFPlone.resources import add_bundle_on_request,add_resource_on_request
 
 
 # grok.templatedir('multiproducts_templates') 
@@ -198,10 +198,7 @@ class BaseB3View(baseview):
         return "col-xs-12 col-sm-%s text-center" % (str(12/self.PerRowPrdtNum))
       
 class BootstrapView(baseview):
-#     grok.context(Iproductfolder)
-#     grok.template('bootstrapview')    
-#     grok.require('zope2.View')
-#     grok.name('bootstrapview')
+
 
     @memoize
     def outtable(self):

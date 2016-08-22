@@ -14,11 +14,11 @@
   <browser:page
     for="my315ok.products.productfolder.Iproductfolder"
     class=".multiproducts.BootstrapView"
-    template="multiproducts_templates/bootstrapview.pt"
-    name="bootstrapview"
+    template="multiproducts_templates/bootstrap3.pt"
+    name="bootstrap3view"
     permission="zope.Public"
     menu="plone_displayviews"
-    title="Bootstrap view"
+    title="lightbox view"
     />    
 
   <browser:page
