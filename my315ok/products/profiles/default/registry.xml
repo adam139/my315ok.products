@@ -4,6 +4,15 @@
     
   <records interface="my315ok.products.interfaces.IMy315okProductsSettings" />
 <!-- Resources -->
+  <records prefix="plone.resources/jquery-lightbox"
+            interface='Products.CMFPlone.interfaces.IResourceRegistry'>
+      <value key="js">++resource++my315ok.products/js/lightbox.min.js</value>
+      <value key="css">
+        <element>++resource++my315ok.products/css/lightbox.css</element>
+      </value>
+      <value key="deps">jquery</value>
+ </records>
+
   <records prefix="plone.resources/jqzoom"
             interface='Products.CMFPlone.interfaces.IResourceRegistry'>
       <value key="js">++resource++my315ok.products/js/jquery.jqzoom-core-pack.js</value>

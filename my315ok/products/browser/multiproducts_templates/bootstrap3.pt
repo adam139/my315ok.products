@@ -5,11 +5,7 @@
       lang="en"
       metal:use-macro="context/main_template/macros/master"
       i18n:domain="my315ok.products">
-<head>
-    <metal:block fill-slot="style_slot">
-        <link rel="stylesheet" type="text/css" href="http://images.315ok.org/lightbox2-master/css/lightbox.css" media="screen" />           
-    </metal:block>
-</head>   
+   
 <body>
 <metal:main fill-slot="content-core">
     <tal:main-macro metal:define-macro="content-core">
@@ -32,7 +28,8 @@
                tal:content="structure python:view.overview(j)" >
 		       </div>               					 
               <div class="col-xs-12 col-md-4" tal:condition="exists:python:imglists['large'][j]">
-              <a href="#" tal:attributes="href python:imglists['large'][j]" 
+              <a href="#" tal:attributes="href python:imglists['large'][j];
+              	data-lightbox python:str(j)" 
               	class="jqzoom" 
               	data-lightbox="lightbox" 
               	tal:content="structure python:img"></a>
@@ -54,25 +51,5 @@
 		</div>
     </tal:main-macro>
 </metal:main>
-<metal:js fill-slot="javascript_bottom_slot">
-<script type="text/javascript" tal:attributes="src string:http://images.315ok.org/lightbox2-master/js/lightbox.min.js" />
-<script type="text/javascript">
-$(function() {
-	$('a.lightbox').lightBox(
-{
-	overlayBgColor: '#FFF',
-	overlayOpacity: 0.6,
-	imageLoading: 'http://images.315ok.org/images/lightbox-ico-loading.gif',
-	imageBtnClose: 'http://images.315ok.org/images/lightbox-btn-close.gif',
-	imageBtnPrev: 'http://images.315ok.org/images/lightbox-btn-prev.gif',
-	imageBtnNext: 'http://images.315ok.org/images/lightbox-btn-next.gif',
-	containerResizeSpeed: 350,
-	txtImage: '图片',
-	txtOf: '总共'	
-   }	
-	); 
-});
-</script>
-</metal:js>
 </body>
 </html>

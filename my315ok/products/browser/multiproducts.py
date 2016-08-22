@@ -199,7 +199,12 @@ class BaseB3View(baseview):
       
 class BootstrapView(baseview):
 
-
+    def __init__(self,context, request):
+        # Each view instance receives context and request as construction parameters
+        self.context = context
+        self.request = request
+        add_resource_on_request(self.request, 'jquery-lightbox')
+        
     @memoize
     def outtable(self):
         out = """
