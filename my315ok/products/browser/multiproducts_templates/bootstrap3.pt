@@ -8,8 +8,8 @@
    
 <body>
 <metal:main fill-slot="content-core">
-    <tal:main-macro metal:define-macro="content-core">
-		 <div tal:define="imglists python: view.mainimage(fieldname='image');
+  <tal:main-macro metal:define-macro="content-core">
+    <div tal:define="imglists python: view.mainimage(fieldname='image');
 		 	                loop python:imglists['preview'];
 		                  Batch python:modules['plone.batching'].Batch;
                       b_size python:view.PerPagePrdtNum;

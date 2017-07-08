@@ -4,14 +4,13 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       lang="en"
       metal:use-macro="context/main_template/macros/master"
-      i18n:domain="my315ok.products">
-     
+      i18n:domain="my315ok.products">     
 <body>
 <metal:main fill-slot="content-core">
-    <tal:main-macro metal:define-macro="content-core">
-		 <div tal:define="imglists python: view.mainimage(fieldname='image');
+  <tal:main-macro metal:define-macro="content-core">
+	<div tal:define="imglists python: view.mainimage(fieldname='image');
 		 	                loop python:imglists['preview'];		 	
-		 								 total python:len(loop);
+		 					total python:len(loop);
 		 	                Batch python:modules['plone.batching'].Batch;
 		 	                cols python:view.PerRowPrdtNum;
 		 	                b_size python:view.PerPagePrdtNum;
@@ -19,50 +18,48 @@
 		 	                b_start request/b_start | b_start;"
 		 	     tal:omit-tag=""
 		 	     tal:condition="total">
-		 <div tal:define="batch python:Batch(loop,b_size, int(b_start), orphan=0);"
+	  <div tal:define="batch python:Batch(loop,b_size, int(b_start), orphan=0);"
 		 		  tal:omit-tag="">
-		 	<div class="row">
+		 <div class="row">
 		 		<tal:batchnavigation
     			define="batchnavigation nocall:context/@@batchnavigation"
     			replace="structure python:batchnavigation(batch)" />
-    		</div>
-
+    	</div>
         <div class="row"        	
         	tal:repeat = "row python:view.rows_perpage()">
-        	<div tal:repeat="col python:range(cols)" tal:omit-tag="">
-             <div tal:define="r repeat/row/index;
-             									c repeat/col/index;
-             									k python:r * cols + c;
-             									j python:k + b_start;
-             								  disp python:(k < b_size) and (j < total)"
+          <div tal:repeat="col python:range(cols)" tal:omit-tag="">
+            <div tal:define="r repeat/row/index;
+             				  c repeat/col/index;
+             				  k python:r * cols + c;
+             				  j python:k + b_start;
+             				  disp python:(k < b_size) and (j < total)"
              			class="proditem"
              			tal:attributes="class python:view.col_class()">            	
-        			<div tal:omit-tag="" tal:condition="disp">
+        	  <div tal:omit-tag="" tal:condition="disp">
 		        <h2 class="title">
-		        	<a tal:content="python: imglists['title'][j]" tal:attributes="href python:imglists['imgurl'][j]">title</a>
-              </h2>					 
-              <div class="row">
-              <div class="col-md-4" tal:condition="exists:python:imglists['large'][j]">
-              <a class="jqzoom" tal:attributes="href python:imglists['large'][j]" data-lightbox="lightbox" tal:content="structure python:imglists['preview'][j]"></a>
-              </div>
-		       <div class="col-md-8 text-left"  tal:condition="exists:python:view.overview(j)"
-               tal:content="structure python:view.overview(j)" >
-		       </div> <!-- end overview-->	
-		       </div>       	        	       
-            </div> <!--end of define-->
-            </div>
-          </div> <!--end of col define-->           
-           
-		     </div> <!-- end of row define-->
-		 	<div class="row">
+		        	<a tal:content="python: imglists['title'][j]" 
+		        		tal:attributes="href python:imglists['imgurl'][j]">title</a>
+                </h2>					 
+                <div class="row">
+                  <div class="col-md-4" tal:condition="exists:python:imglists['large'][j]">
+                    <a class="jqzoom" tal:attributes="href python:imglists['large'][j]" data-lightbox="lightbox" tal:content="structure python:imglists['preview'][j]"></a>
+                  </div>
+		          <div class="col-md-8 text-left"  tal:condition="exists:python:view.overview(j)"
+                       tal:content="structure python:view.overview(j)">
+		          </div> <!-- end overview-->	
+		        </div>       	        	       
+              </div> <!--end of disp-->
+           </div> <!--end of proditem-->
+          </div> <!--end of col repeat-->                     
+		</div> <!-- end of row repeat-->
+		<div class="row">
 		 		<tal:batchnavigation
     			define="batchnavigation nocall:context/@@batchnavigation"
     			replace="structure python:batchnavigation(batch)" />
-    		</div>
-		 </div><!--end of batch define -->	   
-		 </div><!--end of imglists define batch -->
+    	</div>
+	  </div><!--end of batch define -->	   
+	  </div><!--end of imglists define -->
     </tal:main-macro>
 </metal:main>
-
 </body>
 </html>
