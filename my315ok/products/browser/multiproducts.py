@@ -1,5 +1,4 @@
 #-*- coding: UTF-8 -*-
-# from five import grok
 from Acquisition import aq_inner
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
@@ -9,13 +8,7 @@ from plone.memoize.instance import memoize
 from BeautifulSoup import BeautifulSoup as bt
 from Products.CMFPlone.resources import add_bundle_on_request,add_resource_on_request
 
-
-# grok.templatedir('multiproducts_templates') 
 class baseview(BrowserView):
-#     grok.context(Iproductfolder)
-#     grok.template('baseview')    
-#     grok.require('zope2.View')
-#     grok.name('baseview')
 
 #<img src="" tal:attributes="src string:${item/getURL}/@@images/image/thumb" />
 
@@ -39,9 +32,7 @@ class baseview(BrowserView):
         return self.context.PerRowPrdtNum 
     
     def span_num(self):
-#        import pdb
-#        pdb.set_trace()
-#        return "span" + str(12/self.PerRowPrdtNum)
+
         return "span%s" % (str(12/self.PerRowPrdtNum))    
          
     @memoize
@@ -50,7 +41,6 @@ class baseview(BrowserView):
         catalog = getToolByName(context, 'portal_catalog')
         sepath= '/'.join(self.context.getPhysicalPath()) 
         query = {'object_provides': Iproduct.__identifier__,
-                 'review_status':'published',
                  'sort_on':'created',
                  'sort_order':'reverse',
                  'path':sepath,
@@ -60,7 +50,6 @@ class baseview(BrowserView):
 
     @memoize
     def img_fast_tag(self,fieldname="image",small="tile",preview="mini",large="large"):
-
         imglists = {}
         csmall = []
         cpreview = []
@@ -72,7 +61,6 @@ class baseview(BrowserView):
         for i in self.prdt_images():            
                 try:
                     objurl = i.getURL()
-#                    base =  objurl + "/@@images/" + fieldname + "/"
                     base = "%s/@@images/%s/" % (objurl,fieldname)                   
                     tl = i.Title
                     caption = i.Description
@@ -81,9 +69,6 @@ class baseview(BrowserView):
                     lurl = base  + large 
                     simg = "<img src='%s' alt='%s' />" % (surl,tl)
                     pimg = "<img src='%s' alt='%s' />" % (purl,tl)
-#<img src="" tal:attributes="src string:${item/getURL}/@@images/image/thumb" />                    
-#                    limg = "<img src='%s' alt='%s' title='%s' />" % (lurl,tl,tl)
-#                    imgobjurl = objurl + "/@@view" 
                     imgobjurl = "%s/@@view" % (objurl)                   
                     csmall.append(simg)
                     cpreview.append(pimg)
@@ -103,7 +88,6 @@ class baseview(BrowserView):
     
     def mainimage(self,fieldname="image"):
         main = self.img_fast_tag("image")
-
         return main
     
 # bt is beautiful soup ,small picture come from rich text field's img tag      
@@ -118,8 +102,7 @@ class baseview(BrowserView):
 # if table exist then return parameter table        
     def parameters(self,j):
         aux = self.details(fieldname="text")
-        sp = bt(aux["comments"][j])
-       
+        sp = bt(aux["comments"][j])       
         try:
             par = sp("table")[0].__str__()
         except:
@@ -127,15 +110,12 @@ class baseview(BrowserView):
         return par
 # overview
     def overview(self,j):
-#        import pdb
-#        pdb.set_trace()
         return  self.details(fieldname="text")['comments'][j]
     
  # fetch product footer notes   
     def notes(self,j):
         aux = self.details(fieldname="text")
-        sp = bt(aux["comments"][j])
-       
+        sp = bt(aux["comments"][j])       
         try:
             par = sp.find("div","footer-notes")
             if par ==None:
@@ -148,8 +128,7 @@ class baseview(BrowserView):
         
     @memoize
     def details(self,fieldname="text"):
-        imglists = {} 
-       
+        imglists = {}       
         cpara = [i.text for i in self.prdt_images()]                         
         imglists["comments"] = cpara        
         return imglists
@@ -167,9 +146,7 @@ class BaseB2View(baseview):
 #     grok.name('baseb2view')
     
     def col_class(self):
-#        import pdb
-#        pdb.set_trace()
-#        return "span" + str(12/self.PerRowPrdtNum)
+
         return "span%s" % (str(12/self.PerRowPrdtNum))    
     
 class BaseB3View(baseview):
@@ -192,9 +169,6 @@ class BaseB3View(baseview):
         return range(rows) 
        
     def col_class(self):
-#        import pdb
-#        pdb.set_trace()
-#        return "span" + str(12/self.PerRowPrdtNum)
         return "col-xs-12 col-sm-%s text-center" % (str(12/self.PerRowPrdtNum))
       
 class BootstrapView(baseview):
@@ -239,8 +213,7 @@ class BootstrapView(baseview):
                 if s2 == total:
                     break
                 richtext = self.overview(s2)
-#                import pdb
-#                pdb.set_trace()                
+             
                 output = """%(output)s
                 <div class="%(spanclass)s">
                 <h3 class="title"><a href="%(url)s">%(title)s</a></h3>
