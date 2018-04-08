@@ -40,7 +40,7 @@ class Iproduct(form.Schema, IImageScaleTraversable):
                              required=False,)    
     text = RichText(
             title=_(u"details spec of the product"),
-            required=True,
+            required=False,
         )
 
 
