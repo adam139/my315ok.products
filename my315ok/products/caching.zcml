@@ -8,16 +8,11 @@
     <cache:ruleset
         for=".browser.multiproducts.baseview"
         ruleset="plone.content.folderView"
-        />
-
-    
+        />    
     <cache:ruleset
         for=".browser.multiproducts.barsview"
         ruleset="plone.content.folderView"
-        />
-    
-
-    
+        />    
     <cache:ruleset
         for=".browser.product.view"
         ruleset="plone.content.itemView"
