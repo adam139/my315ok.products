@@ -1,9 +1,9 @@
-import unittest
-
-from plone.testing.z2 import Browser
-from plone.app.testing import SITE_OWNER_NAME, SITE_OWNER_PASSWORD
-
 from my315ok.products.testing import MY315OK_PRODUCTS_FUNCTIONAL_TESTING
+from plone.app.testing import SITE_OWNER_NAME
+from plone.app.testing import SITE_OWNER_PASSWORD
+from plone.testing.z2 import Browser
+
+import unittest
 
 
 class TestControlPanel(unittest.TestCase):

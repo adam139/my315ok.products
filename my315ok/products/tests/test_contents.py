@@ -1,8 +1,9 @@
-import unittest
-
 from my315ok.products.testing import MY315OK_PRODUCTS_INTEGRATION_TESTING
-from plone.app.testing import TEST_USER_ID, setRoles
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from plone.namedfile.file import NamedImage
+
+import unittest
 
 
 class Allcontents(unittest.TestCase):

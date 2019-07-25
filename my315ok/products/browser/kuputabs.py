@@ -1,8 +1,8 @@
 
-from five import grok
 from Acquisition import aq_inner
-from Products.CMFCore.utils import getToolByName
+from five import grok
 from plone.dexterity.interfaces import IDexterityContent
+from Products.CMFCore.utils import getToolByName
 
 
 class kuputabsview(grok.View):

@@ -1,14 +1,18 @@
 # -*- coding: UTF-8 -*-
-from Products.CMFCore.utils import getToolByName
 from my315ok.products.testing import MY315OK_PRODUCTS_FUNCTIONAL_TESTING
-from plone.app.testing import TEST_USER_ID, login, TEST_USER_NAME, \
-    TEST_USER_PASSWORD, setRoles
-from plone.testing.z2 import Browser
-import unittest
+from plone.app.testing import login
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import TEST_USER_NAME
+from plone.app.testing import TEST_USER_PASSWORD
 #from eisoo.operation import areafolder
 #from eisoo.operation import area
 from plone.namedfile.file import NamedImage
+from plone.testing.z2 import Browser
+from Products.CMFCore.utils import getToolByName
+
 import os
+import unittest
 
 
 def getFile(filename):

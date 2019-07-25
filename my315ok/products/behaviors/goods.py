@@ -1,15 +1,17 @@
-from zope.interface import alsoProvides, implements
-from zope.component import adapts
-from zope import schema
-from plone.directives import form
-from plone.dexterity.interfaces import IDexterityContent
+from my315ok.products import MessageFactory as _
 from plone.autoform.interfaces import IFormFieldProvider
+from plone.dexterity.interfaces import IDexterityContent
+from plone.directives import form
+from zope import schema
+from zope.component import adapts
+from zope.interface import alsoProvides
+from zope.interface import implements
+
 
 #from plone.namedfile import field as namedfile
 #from z3c.relationfield.schema import RelationChoice, RelationList
 #from plone.formwidget.contenttree import ObjPathSourceBinder
 
-from my315ok.products import MessageFactory as _
 
 
 class Igoods(form.Schema):

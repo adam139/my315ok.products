@@ -1,7 +1,7 @@
-from zope.interface import Interface
-from zope import schema
-
 from my315ok.products import MessageFactory as _
+from zope import schema
+from zope.interface import Interface
+
 
 # Settings stored in the registry
 

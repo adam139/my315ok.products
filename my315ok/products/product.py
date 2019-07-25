@@ -1,14 +1,17 @@
 from five import grok
-from plone.directives import dexterity, form
+from my315ok.products import MessageFactory as _
 # from plone.multilingualbehavior import directives
 from plone.app.multilingual.dx import directives
+from plone.app.textfield import RichText
+from plone.directives import dexterity
+from plone.directives import form
+from plone.indexer import indexer
+from plone.namedfile.field import NamedBlobImage
+from plone.namedfile.interfaces import IImageScaleTraversable
 from zope import schema
 from zope.component import queryUtility
-from plone.indexer import indexer
-from plone.namedfile.interfaces import IImageScaleTraversable
-from plone.namedfile.field import NamedBlobImage
-from plone.app.textfield import RichText
-from my315ok.products import MessageFactory as _
+
+
 #from my315ok.products.interfaces import IMy315okProductsSettings
 #from plone.registry.interfaces import IRegistry
 #import pdb

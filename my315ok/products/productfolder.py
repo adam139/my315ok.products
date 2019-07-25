@@ -1,7 +1,8 @@
 from five import grok
-from plone.directives import dexterity, form
-from zope import schema
 from my315ok.products import MessageFactory as _
+from plone.directives import dexterity
+from plone.directives import form
+from zope import schema
 
 
 # Interface class; used to define content-type schema.

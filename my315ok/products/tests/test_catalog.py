@@ -1,23 +1,18 @@
 """refer  the plone.app.discussion catalog indexes
 """
-import unittest
+from datetime import datetime
+from my315ok.products import product as catalog
+from my315ok.products.testing import MY315OK_PRODUCTS_INTEGRATION_TESTING
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.indexer.delegate import DelegatingIndexerFactory
+from Products.CMFCore.utils import getToolByName
+from zope import event
+from zope.annotation.interfaces import IAnnotations
+from zope.component import createObject
 
 import transaction
-from zope import event
-
-from datetime import datetime
-
-from zope.component import createObject
-from zope.annotation.interfaces import IAnnotations
-
-from Products.CMFCore.utils import getToolByName
-
-from plone.app.testing import TEST_USER_ID, setRoles
-
-from my315ok.products.testing import MY315OK_PRODUCTS_INTEGRATION_TESTING
-
-from my315ok.products import product as catalog
-from plone.indexer.delegate import DelegatingIndexerFactory
+import unittest
 
 
 class CatalogSetupTest(unittest.TestCase):

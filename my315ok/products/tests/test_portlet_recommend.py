@@ -1,22 +1,18 @@
-import unittest
-
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import setRoles
-from plone.app.testing import logout
-
+from my315ok.products.portlets import recommendportlet as myportlet
 from my315ok.products.testing import MY315OK_PRODUCTS_INTEGRATION_TESTING
-
-from zope.component import getUtility, getMultiAdapter
-
-from plone.portlets.interfaces import IPortletType
-from plone.portlets.interfaces import IPortletManager
+from plone.app.testing import logout
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from plone.portlets.interfaces import IPortletAssignment
 from plone.portlets.interfaces import IPortletDataProvider
+from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletRenderer
-
+from plone.portlets.interfaces import IPortletType
 from Products.CMFCore.utils import getToolByName
+from zope.component import getMultiAdapter
+from zope.component import getUtility
 
-from my315ok.products.portlets import recommendportlet as myportlet
+import unittest
 
 
 class TestPortlet(unittest.TestCase):
