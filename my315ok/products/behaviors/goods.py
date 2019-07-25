@@ -18,54 +18,64 @@ class Igoods(form.Schema):
     """
 
     market_price = schema.Float(
-                    title=_(u"market price"),
-                    default = 0.0,
-                    required=False
-                                         )
+        title=_(u"market price"),
+        default=0.0,
+        required=False
+    )
     our_price = schema.Float(
-                    title=_(u"our price"),
-                    default = 0.0,
-                    required=False
-                                         )
+        title=_(u"our price"),
+        default=0.0,
+        required=False
+    )
     brand = schema.TextLine(
-                            title=_(u"brand"),
-                             )
+        title=_(u"brand"),
+    )
     model = schema.TextLine(
-                            title=_(u"model"),
-                             )  
+        title=_(u"model"),
+    )
     text = schema.Text(
-                            title=_(u"details description"),
-                             )            
+        title=_(u"details description"),
+    )
     # -*- Your Zope schema definitions here ... -*-
     form.fieldset(
-                  'sales',
-                  label=_(u'sales'),
-                  fields=['market_price','our_price','brand','model','text'],
-                  )
+        'sales',
+        label=_(u'sales'),
+        fields=[
+            'market_price',
+            'our_price',
+            'brand',
+            'model',
+            'text'],
+    )
 
-alsoProvides(Igoods,IFormFieldProvider)
+
+alsoProvides(Igoods, IFormFieldProvider)
+
 
 def context_property(name):
     def getter(self):
         return getattr(self.context, name)
+
     def setter(self, value):
         setattr(self.context, name, value)
+
     def deleter(self):
         delattr(self.context, name)
     return property(getter, setter, deleter)
 
+
 class goods(object):
     """
-       Adapter for productfolder 
+       Adapter for productfolder
     """
     implements(Igoods)
     adapts(IDexterityContent)
 
-    def __init__(self,context):
+    def __init__(self, context):
         self.context = context
     market_price = context_property('market_price')
     our_price = context_property('our_price')
     brand = context_property('brand')
     model = context_property('model')
-    text = context_property('text')            
+    text = context_property('text')
     # -*- Your behavior property setters & getters here ... -*-

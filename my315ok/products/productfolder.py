@@ -10,7 +10,7 @@ class Iproductfolder(form.Schema):
     """
     A container that contain multiple products
     """
-    
+
     # If you want a schema-defined interface, delete the form.model
     # line below and delete the matching file in the models sub-directory.
     # If you want a model-based interface, edit
@@ -25,10 +25,9 @@ class Iproductfolder(form.Schema):
         title=_(u"product numbers will be display in a row(default 4)"),
         description=(u"here you can set every row display product numbers"),
         default=4,
-    )    
-    
+    )
 
-        
+
 #    form.model("models/productfolder.xml")
 
 
@@ -39,7 +38,5 @@ class Iproductfolder(form.Schema):
 
 class productfolder(dexterity.Container):
     grok.implements(Iproductfolder)
-    
+
     # Add your class methods and properties here
-
-
