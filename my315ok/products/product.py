@@ -1,7 +1,7 @@
-from five import grok
+# from five import grok
 from my315ok.products import MessageFactory as _
 # from plone.multilingualbehavior import directives
-from plone.app.multilingual.dx import directives
+# from plone.app.multilingual.dx import directives
 from plone.app.textfield import RichText
 from plone.directives import dexterity
 from plone.directives import form
@@ -32,7 +32,7 @@ class Iproduct(form.Schema, IImageScaleTraversable):
     a product content that contain product image,rich text product spec and product parameters table etc.
     """
 
-    directives.languageindependent('image')
+#     directives.languageindependent('image')
     image = NamedBlobImage(
         title=_(u"product image"),
         description=_(u"a main image of the product"),
@@ -48,7 +48,10 @@ class Iproduct(form.Schema, IImageScaleTraversable):
 
 
 class product(dexterity.Item):
-    grok.implements(Iproduct)
+    """
+    a product class is item style
+    """
+#     grok.implements(Iproduct)
 
     # Add your class methods and properties here
 

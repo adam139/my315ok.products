@@ -33,7 +33,7 @@
    <element value="view"/>    
    <element value="baseb3view"/>   
    <element value="bootstrap3view"/>    
-   <element value="barsview"/>  
+   <element value="mediapageb3view"/>  
   </property>
   <property name="default_view_fallback">False</property>
   <property name="add_permission">cmf.AddPortalContent</property>

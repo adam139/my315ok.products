@@ -1,4 +1,4 @@
-from five import grok
+# from five import grok
 from my315ok.products import MessageFactory as _
 from plone.directives import dexterity
 from plone.directives import form
@@ -38,6 +38,8 @@ class Iproductfolder(form.Schema):
 # in separate view classes.
 
 class productfolder(dexterity.Container):
-    grok.implements(Iproductfolder)
+    """ productfolder class is container style
+    """
+#     grok.implements(Iproductfolder)
 
     # Add your class methods and properties here

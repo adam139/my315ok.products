@@ -86,7 +86,7 @@ class TestProductsFolderView(unittest.TestCase):
 
         import transaction
         transaction.commit()
-        page = portal.absolute_url() + '/productfolder1/@@view'
+        page = portal.absolute_url() + '/productfolder1/@@mediapageb3view'
 
         browser.open(page)
 
@@ -107,12 +107,12 @@ class TestProductsFolderView(unittest.TestCase):
         import transaction
         transaction.commit()
 
-        page = portal.absolute_url() + '/productfolder1/@@bootstrapview'
+        page = portal.absolute_url() + '/productfolder1/@@bootstrap3view'
 
         browser.open(page)
         obj = portal.absolute_url() + '/productfolder1/product1'
-        open('/tmp/test.html', 'w').write(browser.contents)
-        outstr = '<a href="%s/@@images/image/large" title="a gif image" class="lightbox">' % obj
+#         open('/tmp/test.html', 'w').write(browser.contents)
+        outstr = 'href="%s/@@images/image/large"' % obj
 
         self.assertTrue(outstr in browser.contents)
 
